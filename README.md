@@ -3,7 +3,7 @@
 Sample config files and commands.
 
 
-* Services:
+## Services:
 
  - ssh (sshd)
  - bind (named)
