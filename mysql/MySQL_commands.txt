@@ -1,0 +1,19 @@
+MYSQL commands:
+---------------
+
+
+SET PASSWORD FOR 'jeffrey'@'localhost' = PASSWORD('password');
+
+ALTER USER 'jeffrey'@'localhost'
+  IDENTIFIED BY 'new_password' PASSWORD EXPIRE;
+
+ALTER USER 'root'@'localhost' IDENTIFIED BY 'MyNewPass';
+
+
+CREATE USER 'jeffrey'@'localhost' IDENTIFIED BY 'password';
+GRANT ALL ON db1.* TO 'jeffrey'@'localhost';
+GRANT SELECT ON db2.invoice TO 'jeffrey'@'localhost';
+ALTER USER 'jeffrey'@'localhost' WITH MAX_QUERIES_PER_HOUR 90;
+
+FLUSH PRIVILEGES;
+

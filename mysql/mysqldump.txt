@@ -1,0 +1,2 @@
+mysqldump -u root -pMyPassword --database mydatabase > /path/to/dump.sql
+

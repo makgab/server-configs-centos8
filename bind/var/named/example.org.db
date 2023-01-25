@@ -1,0 +1,15 @@
+$TTL 3H
+@	IN SOA	@ root.example.org. (
+					1	; serial
+					1D	; refresh
+					1H	; retry
+					1W	; expire
+					3H )	; minimum
+	NS	@
+	A	127.0.0.1
+	AAAA	::1
+@		IN	A	192.168.1.10
+centos8-srv	IN	A	192.168.1.10
+client		IN	A	192.168.1.100
+ws		IN	A	192.168.1.200
+ws01		IN	CNAME	ws

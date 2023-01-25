@@ -1,0 +1,20 @@
+PostgreSQL commands:
+-------------------
+
+
+CREATE USER jonathan;
+CREATE USER davide WITH PASSWORD 'jw8s0F4';
+CREATE USER miriam WITH PASSWORD 'jw8s0F4' VALID UNTIL '2005-01-01';
+CREATE USER manuel WITH PASSWORD 'jw8s0F4' CREATEDB;
+
+
+ALTER USER Postgres WITH PASSWORD '<newpassword>';
+ALTER USER manuel VALID UNTIL 'Jan 31 2030';
+ALTER USER miriam CREATEUSER CREATEDB;
+
+
+GRANT UPDATE ON accounts TO joe;
+REVOKE ALL ON accounts FROM PUBLIC;
+
+
+

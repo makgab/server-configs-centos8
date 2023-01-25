@@ -1,0 +1,62 @@
+-----------------
+Firewalld command
+-----------------
+
+
+
+* Network interfaces:
+
+   * NIC
+
+
+
+
+* Zones:
+
+   * Zone -> NIC
+   * Default zones: drop, block, dmz, external, internal, public, work, home, trusted ...
+
+
+
+* Service:
+
+   systemctl start firewalld
+   systemctl stop firewalld
+   systemctl status firewalld
+
+
+
+* Commands:
+
+   firewall-cmd --state                                            # statusz
+   firewall-cmd --get-services                                     # szolgaltatasok listaja
+   firewall-cmd --get-default-zone                                 # default zona
+   firewall-cmd --get-active-zones                                 # aktiv zonak
+   firewall-cmd --get-zones                                        # elerheto zonak
+   firewall-cmd --zone=home --list-all                             # zona beallitasok
+   firewall-cmd --list-all-zones                                   # zona listak
+   firewall-cmd --zone=home --change-interface=eth0                # interfesz zonahoz kotese
+   firewall-cmd --set-default-zone=home                            # default zona beallitasa
+   firewall-cmd --........ --permanent                             # vegleges, konfigba beirt
+   firewall-cmd --zone=home --add-service=http --permanent         # http szolgaltatas beallitasa
+   firewall-cmd --zone=home --list-services                        # szerviz listaja
+   firewall-cmd --zone=home --add-port=5000/tcp                    # port hozzaadasa
+   firewall-cmd --zone=home --add-port=5000-5005/tcp               # portok hozzaadasa
+   firewall-cmd --zone=home --list-ports                           # portok listaja
+   firewall-cmd --zone=home --query-masquerade                      # MASQ lekerdezese
+
+   firewall-cmd --permanent --zone=external --add-masquerade       # MASQ beallitasa
+   firewall-cmd --reload                                           # ujratoltes
+    #
+    # cat /proc/sys/net/ipv4/ip_forward
+    # 1
+    #
+
+
+   firewall-cmd –zone=public --add-forward-port=port=22:proto=tcp:toport=3753                              # Port foward
+   firewall-cmd --zone=external --add-forward-port=port=22:proto=tcp:toaddr=192.0.2.55                     # Address forward
+   firewall-cmd --zone=external --add-forward-port=port=22:proto=tcp:toport=2055:toaddr=192.0.2.55         # Port & address forward
+
+
+
+

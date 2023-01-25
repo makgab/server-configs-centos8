@@ -1,0 +1,109 @@
+
+https://www.howtoforge.com/replacing_hard_disks_in_a_raid1_array
+
+
+1. RAID1
+   -----
+
+  /dev/sda1 + /dev/sdb1 = /dev/md0
+  /dev/sda2 + /dev/sdb2 = /dev/md1
+
+  the failed disk: /dev/sdb
+
+
+2. Status
+   ------
+
+  cat /proc/mdstat
+  [UU] --> [U_]
+
+
+3. mdadm
+   -----
+
+  mdadm --manage /dev/md0 --fail /dev/sdb1
+
+  cat /proc/mdstat
+  server1:~# cat /proc/mdstat
+  Personalities : [linear] [multipath] [raid0] [raid1] [raid5] [raid4] [raid6] [raid10]
+  md0 : active raid1 sda1[0] sdb1[2](F)
+  24418688 blocks [2/1] [U_]
+
+  md1 : active raid1 sda2[0] sdb2[1]
+  24418688 blocks [2/2] [UU]
+
+  unused devices: < none >
+
+3.b.
+
+  mdadm --manage /dev/md0 --remove /dev/sdb1
+  cat /proc/mdstat
+
+  server1:~# cat /proc/mdstat
+  Personalities : [linear] [multipath] [raid0] [raid1] [raid5] [raid4] [raid6] [raid10]
+  md0 : active raid1 sda1[0]
+  24418688 blocks [2/1] [U_]
+
+  md1 : active raid1 sda2[0] sdb2[1]
+  24418688 blocks [2/2] [UU]
+
+  unused devices: < none >
+
+3.c.
+
+  mdadm --manage /dev/md1 --fail /dev/sdb2
+
+  cat /proc/mdstat
+
+  server1:~# cat /proc/mdstat
+  Personalities : [linear] [multipath] [raid0] [raid1] [raid5] [raid4] [raid6] [raid10]
+  md0 : active raid1 sda1[0]
+  24418688 blocks [2/1] [U_]
+
+  md1 : active raid1 sda2[0] sdb2[2](F)
+  24418688 blocks [2/1] [U_]
+
+  unused devices: < none >
+
+3.d.
+
+  mdadm --manage /dev/md1 --remove /dev/sdb2
+
+  shutdow -h now
+
+
+4. Replace disk:
+   ------------
+
+  sfdisk -d /dev/sda | sfdisk /dev/sdb
+
+
+  mdadm --manage /dev/md0 --add /dev/sdb1
+  server1:~# mdadm --manage /dev/md0 --add /dev/sdb1
+  mdadm: re-added /dev/sdb1
+
+
+  mdadm --manage /dev/md1 --add /dev/sdb2
+  server1:~# mdadm --manage /dev/md1 --add /dev/sdb2
+  mdadm: re-added /dev/sdb2
+
+
+  cat /proc/mdstat
+
+  syncing...
+
+  If needed rebuild array:
+
+  mdadm --stop /dev/md0
+  mdadm --create --verbose /dev/md0 --level=mirror --raid-devices=2 /dev/sdb1 /dev/sdc1
+
+
+5. GRUB
+   -----
+
+  If needed:
+    grub2-install /dev/sda
+    grub2-install /dev/sdb
+
+
+
