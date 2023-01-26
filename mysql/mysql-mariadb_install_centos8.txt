@@ -1,0 +1,41 @@
+-----------------------
+MySQL service, mariadb
+-----------------------
+
+CentOS 8
+
+
+1. Install:
+
+   dnf install mariadb mariadb-server mariadb-server-utils -y
+
+
+2. Config:
+
+   /etc
+   /etc/my.cnf
+
+   Secure install, configuration: sudo mysql_secure_installation
+
+
+3. Firewall:
+
+   firewall-cmd --zone=internal --add-service=mysql --permanent
+   firewall-cmd --reload
+
+
+4. Service:
+
+   systemctl start mariadb
+   systemctl stop  mariadb
+   systemctl enable mariadb
+   systemctl status mariadb
+
+
+5. Test:
+
+   for example:
+   mysql -u root DBNAME
+   mysqladmin -u root -p ...
+
+
