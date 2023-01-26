@@ -1,0 +1,39 @@
+--------------------
+DHCP service, dhcpd
+--------------------
+
+CentOS 8
+
+
+1. Install:
+
+   dnf install dhcp-server -y
+
+
+2. Config:
+
+   /etc/dhcp
+   /etc/dhcp/dhcpd.conf
+
+
+3. Firewall:
+
+   firewall-cmd --zone=internal --add-service=dhcp --permanent
+   firewall-cmd --zone=internal --add-service=dhcpv6-client --permanent
+   firewall-cmd --reload
+
+
+4. Service:
+
+   systemctl start dhcpd
+   systemctl stop  dhcpd
+   systemctl enable dhcpd
+   systemctl status dhcpd
+
+
+5. Test:
+
+   DHCP client machine.
+
+
+
