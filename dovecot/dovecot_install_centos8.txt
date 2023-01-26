@@ -1,0 +1,73 @@
+---------------------------
+POP3,IMAP service, dovecot
+---------------------------
+
+CentOS 8
+
+
+1. Install:
+
+   dnf install dovecot -y
+
+
+2. Config:
+
+   /etc/dovecot
+   /etc/dovecot/dovecot.conf
+
+--------------------------------------------------------------------------
+ # vi /etc/dovecot/dovecot.conf
+ # line 24: uncomment
+
+ protocols = imap pop3 lmtp
+ # line 30: uncomment and change ( if not use IPv6 )
+
+ listen = *
+ # vi /etc/dovecot/conf.d/10-auth.conf
+ # line 10: uncomment and change ( allow plain text auth )
+
+ disable_plaintext_auth = no
+ # line 100: add
+
+ auth_mechanisms = plain login
+ # vi /etc/dovecot/conf.d/10-mail.conf
+ # line 30: uncomment and add
+
+ mail_location = maildir:~/Maildir
+ # vi /etc/dovecot/conf.d/10-master.conf
+ # line 96-98: uncomment and add like follows
+
+ # Postfix smtp-auth
+ unix_listener /var/spool/postfix/private/auth {
+     mode = 0666
+         user = postfix
+             group = postfix
+             }
+             [root@mail ~]# vi /etc/dovecot/conf.d/10-ssl.conf
+             # line 8: change (not require SSL)
+
+             ssl = no
+----------------------------------------------------------------------------
+
+3. Firewall:
+
+   firewall-cmd --zone=internal --add-service=pop3 --permanent
+   firewall-cmd --zone=internal --add-service=imap --permanent
+   firewall-cmd --reload
+
+
+4. Service:
+
+   systemctl start dovecot
+   systemctl stop  dovecot
+   systemctl enable dovecot
+   systemctl status dovecot
+
+
+5. Test:
+
+   for example:
+   mail clients
+   telnet <IP-host> port
+
+
