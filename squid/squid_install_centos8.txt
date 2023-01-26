@@ -1,0 +1,38 @@
+---------------------
+Proxy service, squid
+---------------------
+
+CentOS 8
+
+
+1. Install:
+
+   dnf install squid -y
+
+
+2. Config:
+
+   /etc/squid
+   /etc/squid/squid.conf
+
+
+3. Firewall:
+
+   firewall-cmd --zone=internal --add-service=squid --permanent
+   firewall-cmd --reload
+
+
+4. Service:
+
+   systemctl start squid
+   systemctl stop  squid
+   systemctl enable squid
+   systemctl status squid
+
+
+5. Test:
+
+   Browsers: firefox, chrome, lynx... stb.
+
+
+
