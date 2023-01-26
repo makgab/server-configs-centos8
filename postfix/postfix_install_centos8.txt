@@ -1,0 +1,42 @@
+----------------------
+SMTP service, postfix
+----------------------
+
+CentOS 8
+
+
+1. Install:
+
+   dnf install postfix -y
+
+
+2. Config:
+
+   /etc/postfix
+   /etc/postfix/main.cf
+   /etc/postfix/master.cf
+   /etc/aliases
+
+
+3. Firewall:
+
+   firewall-cmd --zone=internal --add-service=smtp --permanent
+   firewall-cmd --reload
+
+
+4. Service:
+
+   systemctl start postfix
+   systemctl stop  postfix
+   systemctl enable postfix
+   systemctl status postfix
+
+
+5. Test:
+
+   for example:
+   mail -s "Teszt" username
+   mutt
+        (mailx, mutt packages needed)
+
+
