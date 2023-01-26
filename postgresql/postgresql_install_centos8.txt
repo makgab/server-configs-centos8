@@ -1,0 +1,43 @@
+------------------------------
+PostreSQL service, postgresql
+------------------------------
+
+CentOS 8
+
+
+1. Install:
+
+   dnf install postgresql postgresql-server postgresql-contrib -y
+
+
+2. Config:
+
+   /var/lib/pgsql/data
+   /var/lib/pgsql/data/postgresql.conf
+   /var/lib/pgsql/data/pg_hba.conf
+
+
+3. Firewall:
+
+   firewall-cmd --zone=internal --add-service=postgresql --permanent
+   firewall-cmd --reload
+
+
+4. Service:
+
+   # sudo postgresql-setup initdb
+   systemctl start postgresql
+   systemctl stop  postgresql
+   systemctl enable postgresql
+   systemctl status postgresql
+
+
+5. Test:
+
+   for example:
+   # psql postgres
+   # createuser USERNAME
+   # createdb DBNAME
+
+
+
