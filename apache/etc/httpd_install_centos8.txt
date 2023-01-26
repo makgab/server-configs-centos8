@@ -1,0 +1,41 @@
+--------------------
+HTTP service, httpd
+--------------------
+
+CentOS 8
+
+
+1. Install:
+
+   dnf install httpd mod_ssl php -y
+
+
+2. Config:
+
+   /etc/httpd
+   /etc/httpd/conf/httpd.conf
+   /etc/httpd/conf.d
+
+
+3. Firewall:
+
+   firewall-cmd --zone=internal --add-service=http --permanent
+   firewall-cmd --zone=internal --add-service=https --permanent
+   firewall-cmd --reload
+
+
+4. Service:
+
+   systemctl start httpd
+   systemctl stop  httpd
+   systemctl enable httpd
+   systemctl status httpd
+
+
+5. Testing:
+
+   Browser
+
+   lynx http://192.168.1.10
+   curl http://192.168.1.10
+
