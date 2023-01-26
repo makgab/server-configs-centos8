@@ -1,0 +1,47 @@
+---------------------
+NTP service, chrony
+---------------------
+
+CentOS 8
+
+
+1. Install:
+
+   dnf install chrony -y
+
+
+2. Config:
+
+   # Set the correct timezone:
+   timedatectl set-timezone Europe/Budapest
+
+   # Verify your current timezone:
+   timedatectl
+
+   # config file:
+   /etc/chrony.conf
+
+   # set NTP synchronization with the following command:
+   timedatectl set-ntp true
+
+
+3. Firewall:
+
+   firewall-cmd --zone=internal --add-service=ntp --permanent
+   (firewall-cmd --zone=internal --add-port=123/udp --permanent)
+   firewall-cmd --reload
+
+
+4. Service:
+
+   systemctl start chronyd
+   systemctl stop  chronyd
+   systemctl enable chronyd
+   systemctl status chronyd
+
+
+5. Test:
+
+   Check the client machine time.
+
+
