@@ -1,0 +1,20 @@
+# ------------------------- VirtualHost -------------------------
+#
+# httpd.conf
+# 
+#
+
+
+# Listen:
+NameVirtualHost 10.0.0.1:80
+
+# a virtual host define:
+<VirtualHost server.intranet.myfirm.org:80>
+    DocumentRoot /var/www/html
+    ServerName server.intranet.myfirm.org
+    ServerAlias www.server.intranet.myfirm.org
+    ErrorLog logs/server.intranet.myfirm.org.log
+    CustomLog logs/server.intranet.myfirm.org.custom.log common
+</VirtualHost>
+
+# ------------------------- VirtualHost end  -------------------- 
