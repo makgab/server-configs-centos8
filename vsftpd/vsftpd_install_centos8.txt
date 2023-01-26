@@ -1,0 +1,41 @@
+--------------------
+FTP service, vsftpd
+--------------------
+
+CentOS 8
+
+
+1. Install:
+
+   dnf install vsftpd -y
+
+
+2. Config:
+
+   /etc/vsftpd
+   /etc/vsftpd/vsftpd.conf
+
+
+3. Firewall:
+
+   firewall-cmd --zone=internal --add-service=ftp --permanent
+   firewall-cmd --reload
+
+
+4. Service:
+
+   systemctl start vsftpd
+   systemctl stop  vsftpd
+   systemctl enable vsftpd
+   systemctl status vsftpd
+
+
+5. Test:
+
+   ~# ftp 192.168.1.10
+   ftp> username: user22
+   ftp> password: *****
+
+      or in mc with FTP connection:
+      user22@192.168.1.10
+
