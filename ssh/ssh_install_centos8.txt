@@ -1,0 +1,40 @@
+---------------------
+SSH service, openssh
+---------------------
+
+CentOS 8
+
+
+1. Install:
+
+   dnf install openssh openssh-* -y
+
+
+2. Config:
+
+   /etc/ssh
+   /etc/ssh/sshd_config
+
+
+3. Firewall:
+
+   firewall-cmd --zone=internal --add-service=ssh --permanent
+   firewall-cmd --reload
+
+
+4. Service:
+
+   systemctl start sshd
+   systemctl stop  sshd
+   systemctl enable sshd
+   systemctl status sshd
+
+
+5. Test:
+
+   ssh user1@192.168.1.10
+        or
+   ssh -l user1 192.168.1.10
+
+
+
