@@ -1,0 +1,40 @@
+--------------------
+CIFS service, samba
+--------------------
+
+CentOS 8
+
+
+1. Install:
+
+   dnf install samba samba-common samba-client samba-common-tools cifs-utils -y
+
+
+2. Config:
+
+   /etc/samba
+   /etc/samba/smb.conf
+
+
+3. Firewall:
+
+   firewall-cmd --zone=internal --add-service=samba --permanent
+   firewall-cmd --zone=internal --add-service=samba-client --permanent
+   firewall-cmd --reload
+
+
+4. Service:
+
+   systemctl start smb nmb
+   systemctl stop  smb nmb
+   systemctl enable smb nmb
+   systemctl status smb nmb
+
+
+5. Test, admin, using:
+
+    testparm - Samba config test
+    pdbedit -L -v
+    smbpasswd -a username
+    mount.cifs \\\\192.168.1.10\\myshare /mnt/samba -o user=admin
+
