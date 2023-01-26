@@ -1,0 +1,47 @@
+------------------
+DNS service, bind
+------------------
+
+CentOS 8
+
+
+1. Install:
+
+   dnf install bind bind-libs bind-utils -y
+
+
+2. Config:
+
+   /etc/named.*
+   /etc/named.conf
+
+   Zone files:
+   /etc/named.rfc1912.zones
+   /var/named/example_myzone.db
+
+
+3. Firewall:
+
+   firewall-cmd --zone=internal --add-service=dns --permanent
+   firewall-cmd --reload
+
+
+4. Service:
+
+   systemctl start named
+   systemctl stop  named
+   systemctl enable named
+   systemctl status named
+
+
+5. Test:
+
+   # Check the config file:
+   named-checkconf
+
+   # dig fqdn @dns_server
+   dig server.example.org @127.0.0.1
+
+   # nslookup fqdn dns_server
+   nslookup server.example.org 127.0.0.1
+
